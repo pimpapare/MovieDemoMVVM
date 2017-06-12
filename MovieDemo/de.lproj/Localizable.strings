@@ -1,0 +1,26 @@
+/* 
+  Localizable.strings
+  MovieDemo
+
+  Created by pimpaporn chaichompoo on 6/7/17.
+  Copyright © 2017 Pimpaporn Chaichompoo. All rights reserved.
+*/
+
+/* error */
+"no_login" = "Du bist noch nicht eingeloggt.";
+"can't_create_post" = "Dein Inserat wurde nicht erstellt. Bitte versuche es später nochmal.";
+"error_about_user" = "Da ist etwas schiefgelaufen. Versuche es bitte später nochmal.";
+"error_text" = "Error. Bitte versuchen Sie es später noch einmal.";
+"error_471" = "Header wird nicht richtig ausgeführt.";
+"error_472" = "Objekt wird nicht richtig ausgeführt.";
+"error_473" = "Daten wird nicht richtig ausgeführt.";
+"error_474" = "Ein unbekannter Fehler ist aufgetreten.";
+"error_475" = "Datei kann nicht gelesen werden.";
+"error_401" = "Login erforderlich";
+"error_403" = "nicht erlaubt";
+"error_404" = "Objekt nicht gefunden";
+"error_405" = "dieses Verfahren ist nicht erlaubt.";
+"error_409" = "Konflikt";
+"error_500" = "INTERNAL SERVER ERROR";
+"error_501" = "Nicht implementiert";
+"error_204" = "kein Inhalt";

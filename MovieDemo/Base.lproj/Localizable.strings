@@ -1,0 +1,26 @@
+/* 
+  Localizable.strings
+  MovieDemo
+
+  Created by pimpaporn chaichompoo on 6/7/17.
+  Copyright © 2017 Pimpaporn Chaichompoo. All rights reserved.
+*/
+
+/* error */
+"no_login" = "You are not logged in yet.";
+"can't_create_post" = "The post was not created. Please try again later.";
+"error_about_user" = "Error. Please try again later.";
+"error_text" = "Error. Please try again later.";
+"error_471" = "MISSING REQUIRED HEADER";
+"error_472" = "MISSING REQUIRED OBJECT";
+"error_473" = "MISSING REQUIRED DATA";
+"error_474" = "UPDATE FIELD UNKNOWN";
+"error_475" = "DATA IS NOT JASON READABLE";
+"error_401" = "LOGIN REQUIRED";
+"error_403" = "FORBIDDEN";
+"error_404" = "OBJECT NOT FOUND";
+"error_405" = "METHOD NOT ALLOWED";
+"error_409" = "CONFLICT";
+"error_500" = "INTERNAL SERVER ERROR";
+"error_501" = "NOT IMPLEMENTED";
+"error_204" = "NO CONTENT";

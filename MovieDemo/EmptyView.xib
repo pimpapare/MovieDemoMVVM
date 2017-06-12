@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="EmptyView" id="RoF-su-XiP" customClass="EmptyView" customModule="MovieDemo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bcm-on-fyE">
+                    <rect key="frame" x="161.5" y="487" width="53" height="30"/>
+                    <state key="normal" title="Refresh"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Bcm-on-fyE" secondAttribute="trailing" constant="160.5" id="9NJ-6i-uJJ"/>
+                <constraint firstAttribute="bottom" secondItem="Bcm-on-fyE" secondAttribute="bottom" constant="150" id="Cqw-wj-Z5S"/>
+                <constraint firstItem="Bcm-on-fyE" firstAttribute="leading" secondItem="RoF-su-XiP" secondAttribute="leading" constant="161.5" id="Uge-US-w02"/>
+                <constraint firstItem="Bcm-on-fyE" firstAttribute="top" secondItem="RoF-su-XiP" secondAttribute="top" constant="487" id="YDN-GG-xu1"/>
+            </constraints>
+            <connections>
+                <outlet property="button" destination="Bcm-on-fyE" id="3Eq-VD-i7P"/>
+            </connections>
+            <point key="canvasLocation" x="-82" y="-273"/>
+        </view>
+    </objects>
+</document>
