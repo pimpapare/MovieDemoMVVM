@@ -7,69 +7,58 @@
 //
 
 import UIKit
-import IGListKit
 import EZSwiftExtensions
 
-class MovieViewController: UIViewController {
+import RxCocoa
+import RxSwift
 
-    lazy var adapter: ListAdapter = {
-        return ListAdapter(updater: ListAdapterUpdater(), viewController: self, workingRangeSize: 0)
-    }()
+class MovieViewController: UIViewController {
+    
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     lazy var movieViewModel:MovieViewModel = MovieViewModel(delegate: self)
+    let disposeBag = DisposeBag()
+    var querySucess:Bool = false
     
-    var collectionView:UICollectionView!
-    var sizeForTopOfCollectionView:CGFloat!
-
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
-        setCollectionView()
-        self.movieViewModel.getMovieList()
+        movieViewModel.getMovieList()
+        
+        setTableView()
+        observeSearchBar()
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
+    func observeSearchBar() {
         
-        sizeForTopOfCollectionView = self.movieViewModel.sizeForTopOfCollectionView()
-        collectionView.frame = CGRect(x:0,y: sizeForTopOfCollectionView,width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height-sizeForTopOfCollectionView)
-        
-        guard let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
-            return
-        }
-        
-        flowLayout.invalidateLayout()
+        searchBar
+            .rx.text
+            .orEmpty
+            .debounce(0.5, scheduler: MainScheduler.instance)
+            .distinctUntilChanged()
+            .filter { !$0.isEmpty }
+            .subscribe(onNext: { [unowned self] query in
+                
+                self.movieViewModel.queryData(query: query, completionHandler: { (success) in
+                    self.querySucess = success
+                    self.tableView.reloadData()
+                })
+            })
+            .addDisposableTo(disposeBag)
     }
     
     override func onDataDidLoad() {
-        
-        if self.movieViewModel.isPullToRefresh {
-            self.movieViewModel.isPullToRefresh = false
-            if #available(iOS 10.0, *) {
-                self.adapter.collectionView?.refreshControl?.endRefreshing()
-            }
-        }
-        adapter.performUpdates(animated: true, completion: nil)
+        didReload()
     }
     
     override func onDataDidLoadErrorWithMessage(errorMessage: String) {
         showAlertPopup(title: "Error", message: errorMessage, yes_text: "OK")
     }
     
-    func setCollectionView() {
-        
-        sizeForTopOfCollectionView = self.movieViewModel.sizeForTopOfCollectionView()
-
-        collectionView = UICollectionView(frame:CGRect(x:0,y: sizeForTopOfCollectionView,width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height-sizeForTopOfCollectionView), collectionViewLayout: UICollectionViewFlowLayout())
-        collectionView?.backgroundColor = UIColor.white
-        view.addSubview(collectionView!)
-        
-        adapter.collectionView = collectionView
-        
-        adapter.collectionView?.refreshControl = UIRefreshControl()
-        adapter.collectionView?.refreshControl?.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
-        adapter.dataSource = self
-        adapter.scrollViewDelegate = self
+    func setTableView() {
+        tableView.register(UINib(nibName:"MovieTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
     }
     
     func pullToRefresh() {
@@ -77,42 +66,50 @@ class MovieViewController: UIViewController {
         self.movieViewModel.isPullToRefresh = true
         self.movieViewModel.getMovieList()
     }
-}
-
-extension MovieViewController: ListAdapterDataSource {
     
-    func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
-        return self.movieViewModel.movie
-    }
-    
-    func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
-        switch object {
-        case is MovieModel:
-            return MovieSectionController()
-        default:
-            return ListSectionController()
-        }
-    }
-    
-    func emptyView(for listAdapter: ListAdapter) -> UIView? {
+    func emptyView() -> UIView? {
         let nibView = Bundle.main.loadNibNamed("EmptyView", owner: nil, options: nil)!.first as! EmptyView
         return nibView
+    }
+}
+
+extension MovieViewController: UITableViewDelegate,UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 200
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return movieViewModel.setMovie().count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
+        
+        let cell:MovieTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath) as! MovieTableViewCell
+        cell.setCell(objects:movieViewModel.setMovie()[indexPath.row])
+        
+        return cell
     }
 }
 
 extension MovieViewController: UIScrollViewDelegate, EmptyViewDelegate {
     
     func didReload() {
-        adapter.performUpdates(animated: true, completion: nil)
+        
+        if movieViewModel.setMovie().count == 0 {
+            self.view.addSubview(self.emptyView()!)
+        }
+        
+        self.emptyView()?.removeFromSuperview()
+        self.tableView.reloadData()
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let distance = scrollView.contentSize.height - (targetContentOffset.pointee.y + scrollView.bounds.height)
-//        let nextMovieAvailable = (self.movieViewModel.movie as? [MovieModel])?.last?.nextMovieAvailable
-        if distance < 200 {
-            self.movieViewModel.movie.append(LoadingType.loadmore.rawValue as ListDiffable)
+        
+        if distance < 200 && querySucess == false{
             self.movieViewModel.getMovieList()
-            adapter.performUpdates(animated: true, completion: nil)
+            self.tableView.reloadData()
         }
     }
 }

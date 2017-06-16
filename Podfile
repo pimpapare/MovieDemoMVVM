@@ -4,15 +4,14 @@ use_frameworks!
 
 target 'MovieDemo' do
 
-    pod 'IGListKit', '~> 3.0'
     pod 'Alamofire', '~> 4.3'
     pod 'AlamofireObjectMapper', '~> 4.0'
-    pod 'Kingfisher', '~> 3.0'
     pod 'EZSwiftExtensions'
     pod 'ObjectMapper'
     pod 'moa', '~> 8.0'
 
-    pod 'Mockingjay/Core'
+    pod "RxSwift"
+    pod "RxCocoa"
 
     # Pods for MovieDemo
     

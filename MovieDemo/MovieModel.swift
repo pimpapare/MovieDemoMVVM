@@ -7,11 +7,15 @@
 //
 
 import Foundation
-import IGListKit
 
 class MovieModel: BaseModel {
 
     var movies:[[String:AnyObject]]?
+    var movieName:[String] = [String]()
+    
+    var id : String!
+    var itemName : String!
+    var itemImage : String!
     
     var nextMovieIndex: Int? = 0
     var nextMovieAvailable: Bool?
@@ -21,6 +25,20 @@ class MovieModel: BaseModel {
         self.movies = dict["results"] as? [[String : AnyObject]]        
 //        self.nextMovieIndex = self.movies?.count
         self.nextMovieAvailable = true
+        
+        getMovieName()
+    }
+    
+    func getMovieName(){
+        
+        for dic in movies! {
+            movieName.append(dic["title"] as! String)
+            self.itemName = dic["title"] as! String
+            self.itemImage = dic["backdrop_path"] as! String
+        }
+        
+        print("💜 ",movieName)
+        
     }
     
     func getMovieValue(at index:Int, key:String) -> String{
@@ -34,16 +52,5 @@ struct MovieValue {
     var movies:[[String:AnyObject]]?    
     subscript (_ index:Int,_ key:String) -> AnyObject?{
         return movies?[index][key]
-    }
-}
-
-extension MovieModel: ListDiffable {
-    
-    func diffIdentifier() -> NSObjectProtocol {
-        return self
-    }
-    
-    func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
-        return isEqual(object)
     }
 }

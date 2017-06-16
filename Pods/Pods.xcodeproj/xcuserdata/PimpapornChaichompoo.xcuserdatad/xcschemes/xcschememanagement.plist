@@ -19,21 +19,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>IGListKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Kingfisher.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Mockingjay.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>ObjectMapper.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -54,7 +39,12 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>URITemplate.xcscheme</key>
+		<key>RxCocoa.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>RxSwift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -72,22 +62,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>0FB408FDD1724548E283FB7940306AF3</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>1F1B4BA8D8CBD90137AA191A1D40EE5E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>2B719266374305B8D9B64636FE49999B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>2F0C0F810568D3E82219429D9D870F04</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -97,7 +72,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>519DB3242A71920B7BADC44EE60E5F11</key>
+		<key>3327C96FCC0BD68C51A5BE6960C57ED0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6AFCEEEEF2D2EDEA1F44514B5E76BBC6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -112,12 +92,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9502FB01641FBABB78522037E882757B</key>
+		<key>8C7C8C1D3AC6BB859A28B5CD9B07EC9C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B06AC388C2582D2B2A354AF40056FEED</key>
+		<key>9502FB01641FBABB78522037E882757B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
