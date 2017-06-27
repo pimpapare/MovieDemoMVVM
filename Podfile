@@ -13,6 +13,8 @@ target 'MovieDemo' do
     pod "RxSwift"
     pod "RxCocoa"
 
+    pod 'RealmSwift', '~> 2.2'
+
     # Pods for MovieDemo
     
     target 'MovieDemoTests' do

@@ -40,6 +40,30 @@ class MovieViewModel: BaseViewModel {
         }
     }
     
+    func changeNameOfMovie(name:String) {
+        
+        let mySeq = Observable.from(shownMovie)
+        var newArrayOfDictMovie = [[String:AnyObject]]()
+        
+        mySeq.subscribe(
+            onNext:{
+                
+                var dic = $0
+                
+                Observable<[String:AnyObject]>.of(dic).map {_ in
+                    dic["title"] = name as AnyObject
+                    return dic
+                    }.subscribe(onNext:{
+                        newArrayOfDictMovie.append($0)
+                    })
+        }).dispose()
+        
+        shownMovie = newArrayOfDictMovie
+        print("💛 ",shownMovie)
+        
+        self.delegate?.onDataDidLoad()
+    }
+    
     func getMovieList(){
         
         page = page + 1
@@ -67,6 +91,7 @@ class MovieViewModel: BaseViewModel {
                 }
                 
                 self?.delegate?.onDataDidLoad()
+                self?.delegate?.testChangingName()
                 
             } else {
                 self?.delegate?.onDataDidLoadErrorWithMessage(errorMessage: (error?.localizedDescription)!)

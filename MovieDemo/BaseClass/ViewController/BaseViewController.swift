@@ -19,6 +19,10 @@ extension UIViewController{
 
 extension UIViewController: BaseViewModelDelegate {
     
+    public func testChangingName(){
+        
+    }
+
     public func showLoading() {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
     }

@@ -21,6 +21,8 @@ class MovieViewController: UIViewController {
     let disposeBag = DisposeBag()
     var querySucess:Bool = false
     
+    var finishLoading:Bool = false
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -38,13 +40,13 @@ class MovieViewController: UIViewController {
             .orEmpty
             .debounce(0.5, scheduler: MainScheduler.instance)
             .distinctUntilChanged()
-            .filter { !$0.isEmpty }
             .subscribe(onNext: { [unowned self] query in
                 
                 self.movieViewModel.queryData(query: query, completionHandler: { (success) in
                     self.querySucess = success
                     self.tableView.reloadData()
                 })
+                
             })
             .addDisposableTo(disposeBag)
     }
@@ -55,6 +57,10 @@ class MovieViewController: UIViewController {
     
     override func onDataDidLoadErrorWithMessage(errorMessage: String) {
         showAlertPopup(title: "Error", message: errorMessage, yes_text: "OK")
+    }
+    
+    override func testChangingName() {
+//        movieViewModel.changeNameOfMovie(name: "Pare")
     }
     
     func setTableView() {

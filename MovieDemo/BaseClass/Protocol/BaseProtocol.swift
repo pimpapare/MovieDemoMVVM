@@ -15,6 +15,8 @@ public protocol BaseViewModelDelegate: class {
     func onDataDidLoad()
     func onDataDidLoadErrorWithMessage(errorMessage:String)
     
+    func testChangingName()
+    
     // Loading
     func showLoading()
     func hideLoading()

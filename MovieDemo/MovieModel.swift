@@ -9,9 +9,8 @@
 import Foundation
 
 class MovieModel: BaseModel {
-
+    
     var movies:[[String:AnyObject]]?
-    var movieName:[String] = [String]()
     
     var id : String!
     var itemName : String!
@@ -22,23 +21,9 @@ class MovieModel: BaseModel {
     
     required init(withDictionary dict: [String:AnyObject]) {
         super.init(withDictionary: dict)
-        self.movies = dict["results"] as? [[String : AnyObject]]        
-//        self.nextMovieIndex = self.movies?.count
+        self.movies = dict["results"] as? [[String : AnyObject]]
+        //        self.nextMovieIndex = self.movies?.count
         self.nextMovieAvailable = true
-        
-        getMovieName()
-    }
-    
-    func getMovieName(){
-        
-        for dic in movies! {
-            movieName.append(dic["title"] as! String)
-            self.itemName = dic["title"] as! String
-            self.itemImage = dic["backdrop_path"] as! String
-        }
-        
-        print("💜 ",movieName)
-        
     }
     
     func getMovieValue(at index:Int, key:String) -> String{
@@ -49,7 +34,7 @@ class MovieModel: BaseModel {
 
 struct MovieValue {
     
-    var movies:[[String:AnyObject]]?    
+    var movies:[[String:AnyObject]]?
     subscript (_ index:Int,_ key:String) -> AnyObject?{
         return movies?[index][key]
     }
