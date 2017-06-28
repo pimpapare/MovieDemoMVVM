@@ -14,22 +14,34 @@ import RxSwift
 
 class MovieViewModel: BaseViewModel {
     
-    var allMovies:[[String:AnyObject]] = [[String:AnyObject]]()
-    var shownMovie:[[String:AnyObject]] = [[String:AnyObject]]()
+    var allMovies:[Subscribe] = [Subscribe]()
+    //:[[String:AnyObject]] = [[String:AnyObject]]()
+    var shownMovie:[Subscribe] = [Subscribe]()
+    //:[[String:AnyObject]] = [[String:AnyObject]]()
+    
+    var realmObjects:RealmObjects = RealmObjects()
+    let baseFunction:BaseFunction = BaseFunction()
     
     var isPullToRefresh:Bool = false
     var limit: Int?
     var offset: Int?
     var page: Int! = 0
     
-    func setMovie() -> [[String:AnyObject]]{
+    func setMovie() -> [Subscribe]{
+        
+        // Sort objects not good for sperating toload object from API
+        //shownMovie = realmObjects.getMovieObjectsWithSortName()
+      
+        shownMovie = realmObjects.getMovieObjects()
+        allMovies = shownMovie
+        
         return shownMovie
     }
     
     func queryData(query:String, completionHandler: @escaping (Bool) -> ()){
         
         shownMovie = allMovies.filter {
-            return ($0["title"] as? String)?.range(of:query) != nil
+            return $0.name.range(of: query) != nil
         }
         
         if shownMovie.isEmpty {
@@ -38,30 +50,6 @@ class MovieViewModel: BaseViewModel {
         } else {
             completionHandler(true)
         }
-    }
-    
-    func changeNameOfMovie(name:String) {
-        
-        let mySeq = Observable.from(shownMovie)
-        var newArrayOfDictMovie = [[String:AnyObject]]()
-        
-        mySeq.subscribe(
-            onNext:{
-                
-                var dic = $0
-                
-                Observable<[String:AnyObject]>.of(dic).map {_ in
-                    dic["title"] = name as AnyObject
-                    return dic
-                    }.subscribe(onNext:{
-                        newArrayOfDictMovie.append($0)
-                    })
-        }).dispose()
-        
-        shownMovie = newArrayOfDictMovie
-        print("💛 ",shownMovie)
-        
-        self.delegate?.onDataDidLoad()
     }
     
     func getMovieList(){
@@ -86,16 +74,26 @@ class MovieViewModel: BaseViewModel {
             if let response = response as? MovieModel {
                 
                 for newDic in response.movies!  {
-                    self?.allMovies.append(newDic)
-                    self?.shownMovie.append(newDic)
+                    self?.setMovieObjectToRealm(id: newDic["id"] as? Int ?? 0, name: newDic["title"] as? String ?? "", image: newDic["backdrop_path"] as? String ?? "")
                 }
-                
+
                 self?.delegate?.onDataDidLoad()
                 self?.delegate?.testChangingName()
                 
             } else {
                 self?.delegate?.onDataDidLoadErrorWithMessage(errorMessage: (error?.localizedDescription)!)
             }
+        }
+    }
+    
+    func setMovieObjectToRealm(id:Int, name:String, image:String){
+        realmObjects.writeMovieObject(id: id, name: name, image: image)
+    }
+    
+    func verifyForRemoveRealmObjects(){
+        
+        if baseFunction.isInternetAvailable() {
+            realmObjects.removeMovieObjects()
         }
     }
 }

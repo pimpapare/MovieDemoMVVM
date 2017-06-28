@@ -49,6 +49,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>RxAlamofire.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>RxCocoa.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -67,7 +72,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>09364D07138794106087C58670C7492D</key>
+		<key>08F18887BEA3B75806DAE323C006737F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -82,17 +87,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>426F8B07405ACACE27F5BB048E016327</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>47C2BE83B25E5EE5E02D7A00C0246E51</key>
+		<key>57B275BF6168E38703261D48966BA1BA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>6D8EAC98AE4D94AD3EB0F13FFEF8AC1C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>82C7FC6824BE0DCEC56A0C32309C9DDF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -107,12 +112,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B7C9B87A906C46C78DE47F473AEFB13E</key>
+		<key>B3E470F6D6205306BA6CC4348EEBD4B8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DE9C0449FFE3D5B1BA35369D9E06EDE2</key>
+		<key>B8388BC27D00B012C3F7E8F167A0E953</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C099C88AB7DE9CC031BA459E11303913</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -122,7 +132,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FA8F5782B96E990BE7D3413D78208385</key>
+		<key>FC2B7F6C6DB285A23105C9C78BE2D929</key>
 		<dict>
 			<key>primary</key>
 			<true/>

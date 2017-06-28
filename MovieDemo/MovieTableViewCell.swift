@@ -19,8 +19,12 @@ class MovieTableViewCell: UITableViewCell {
         self.frame = CGRect(x:0,y:0,width:UIScreen.main.bounds.width,height:UIScreen.main.bounds.height)
     }
 
-    func setCell(objects:[String:AnyObject]) {
-        titleCell.text = objects["title"] as? String
-        self.imageCell.moa.url = String(format:"http://image.tmdb.org/t/p/w185/%@",objects["backdrop_path"] as? String ?? "")
+    func setCell(objects:Subscribe) {
+            
+//        titleCell.text = objects["title"] as? String
+//        self.imageCell.moa.url = String(format:"http://image.tmdb.org/t/p/w185/%@",objects["backdrop_path"] as? String ?? "")
+    
+        titleCell.text = objects.name
+        self.imageCell.moa.url = String(format:"http://image.tmdb.org/t/p/w185/%@",objects.image)
     }
 }

@@ -10,6 +10,7 @@
 		1A1D88881F02A99400E14FA3 /* MovieObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1D88861F02A99400E14FA3 /* MovieObjects.swift */; };
 		1A1D88891F02A99400E14FA3 /* RealmObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1D88871F02A99400E14FA3 /* RealmObjects.swift */; };
 		1A49F65E1EE830F200E7FBEE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1A49F6601EE830F200E7FBEE /* Localizable.strings */; };
+		1A4F50BA1F038FC600E1AE88 /* BaseFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4F50B91F038FC600E1AE88 /* BaseFunction.swift */; };
 		1A6075541EE5A337001E2E30 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6075531EE5A337001E2E30 /* AppDelegate.swift */; };
 		1A6075561EE5A337001E2E30 /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6075551EE5A337001E2E30 /* MovieViewController.swift */; };
 		1A60755B1EE5A337001E2E30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A60755A1EE5A337001E2E30 /* Assets.xcassets */; };
@@ -58,6 +59,7 @@
 		1A49F65B1EE830AD00E7FBEE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		1A49F65F1EE830F200E7FBEE /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1A49F6611EE830F400E7FBEE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1A4F50B91F038FC600E1AE88 /* BaseFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseFunction.swift; sourceTree = "<group>"; };
 		1A6075501EE5A337001E2E30 /* MovieDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A6075531EE5A337001E2E30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1A6075551EE5A337001E2E30 /* MovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewController.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				1A6075531EE5A337001E2E30 /* AppDelegate.swift */,
+				1A4F50B91F038FC600E1AE88 /* BaseFunction.swift */,
 				1A6075571EE5A337001E2E30 /* Main.storyboard */,
 				1AB078EF1EEEC00400D2DB1A /* Movie */,
 				1AB71B9B1EE697B80028230E /* APIRequest */,
@@ -581,6 +584,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A4F50BA1F038FC600E1AE88 /* BaseFunction.swift in Sources */,
 				1A6075561EE5A337001E2E30 /* MovieViewController.swift in Sources */,
 				1A6075541EE5A337001E2E30 /* AppDelegate.swift in Sources */,
 				1A1D88891F02A99400E14FA3 /* RealmObjects.swift in Sources */,

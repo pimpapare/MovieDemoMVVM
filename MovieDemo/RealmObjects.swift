@@ -27,26 +27,26 @@ class RealmObjects: NSObject {
         }
     }
     
-    func removeMapObjects(){
+    func removeMovieObjects(){
         
         try! realm.write {
             realm.delete(realm.objects(Subscribe.self))
         }
     }
     
-    func getMapObjects() -> [Subscribe]{
+    func getMovieObjects() -> [Subscribe]{
         
-        guard realm.objects(Subscribe.self).first != nil else {
-            return getMapObjects()
-        }
+//        guard realm.objects(Subscribe.self).first != nil else {
+//            return getMovieObjects()
+//        }
         
         let objects = realm.objects(Subscribe.self).toArray(ofType : Subscribe.self) as [Subscribe]
         return objects
     }
     
-    func getMapObjectsWithSortName() -> [Subscribe]{
+    func getMovieObjectsWithSortName() -> [Subscribe]{
         
-        let sortedMovies = getMapObjects().sorted(by: { $0.name < $1.name })
+        let sortedMovies = getMovieObjects().sorted(by: { $0.name < $1.name })
         return sortedMovies
     }
 }

@@ -14,8 +14,9 @@ target 'MovieDemo' do
     pod "RxCocoa"
 
     pod 'RealmSwift', '~> 2.2'
+    pod 'RxAlamofire'
 
-    # Pods for MovieDemo
+# Pods for MovieDemo
     
     target 'MovieDemoTests' do
         inherit! :search_paths

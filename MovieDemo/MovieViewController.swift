@@ -28,6 +28,7 @@ class MovieViewController: UIViewController {
         super.viewDidLoad()
         
         movieViewModel.getMovieList()
+        movieViewModel.verifyForRemoveRealmObjects()
         
         setTableView()
         observeSearchBar()
@@ -58,11 +59,7 @@ class MovieViewController: UIViewController {
     override func onDataDidLoadErrorWithMessage(errorMessage: String) {
         showAlertPopup(title: "Error", message: errorMessage, yes_text: "OK")
     }
-    
-    override func testChangingName() {
-//        movieViewModel.changeNameOfMovie(name: "Pare")
-    }
-    
+
     func setTableView() {
         tableView.register(UINib(nibName:"MovieTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
     }
@@ -86,13 +83,13 @@ extension MovieViewController: UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movieViewModel.setMovie().count
+        return movieViewModel.shownMovie.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         
         let cell:MovieTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath) as! MovieTableViewCell
-        cell.setCell(objects:movieViewModel.setMovie()[indexPath.row])
+        cell.setCell(objects:movieViewModel.shownMovie[indexPath.row])
         
         return cell
     }
@@ -113,9 +110,8 @@ extension MovieViewController: UIScrollViewDelegate, EmptyViewDelegate {
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let distance = scrollView.contentSize.height - (targetContentOffset.pointee.y + scrollView.bounds.height)
         
-        if distance < 200 && querySucess == false{
+        if distance < 150 && querySucess == false{
             self.movieViewModel.getMovieList()
-            self.tableView.reloadData()
         }
     }
 }
