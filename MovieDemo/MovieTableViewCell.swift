@@ -14,6 +14,8 @@ class MovieTableViewCell: UITableViewCell {
     @IBOutlet weak var imageCell: UIImageView!
     @IBOutlet weak var titleCell: UILabel!
     
+    static let identifier = "MovieTableViewCell"
+
     override func awakeFromNib() {
         super.awakeFromNib()
         self.frame = CGRect(x:0,y:0,width:UIScreen.main.bounds.width,height:UIScreen.main.bounds.height)

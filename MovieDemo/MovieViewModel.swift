@@ -56,14 +56,18 @@ class MovieViewModel: BaseViewModel {
         
         page = page + 1
         
-        let router = Router.getMovieList(
-            api_key: "6c26bbd637c722ffab43dc6984053411",
-            sort_by: "popularity.desc",
-            page: page)
+        let router = AlamofireRouter.getMovieList(api_key: "6c26bbd637c722ffab43dc6984053411",
+            sort_by: "popularity.desc", page: page)
+        
+//        let router = Router.getMovieList(
+//            api_key: "6c26bbd637c722ffab43dc6984053411",
+//            sort_by: "popularity.desc",
+//            page: page)
+        
         callService(router: router)
     }
     
-    func callService(router:Router) {
+    func callService(router:AlamofireRouter) {
         _ = APIRequest.request(withRouter: router, withHandler: getListMovieHandler())
     }
     

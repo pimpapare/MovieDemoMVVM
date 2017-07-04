@@ -3,20 +3,20 @@ platform :ios, '9.0'
 use_frameworks!
 
 target 'MovieDemo' do
-
+    
     pod 'Alamofire', '~> 4.3'
     pod 'AlamofireObjectMapper', '~> 4.0'
     pod 'EZSwiftExtensions'
     pod 'ObjectMapper'
     pod 'moa', '~> 8.0'
-
+    
     pod "RxSwift"
     pod "RxCocoa"
-
+    
     pod 'RealmSwift', '~> 2.2'
     pod 'RxAlamofire'
-
-# Pods for MovieDemo
+    
+    # Pods for MovieDemo
     
     target 'MovieDemoTests' do
         inherit! :search_paths

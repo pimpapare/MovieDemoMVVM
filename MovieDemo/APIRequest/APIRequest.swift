@@ -13,7 +13,7 @@ import AlamofireObjectMapper
 public class APIRequest {
     public typealias completionHandler = (AnyObject?, Error?) -> Void
     
-    public static func request(withRouter router: MovieRouter, withHandler handler: @escaping completionHandler) -> Request?  {
+    public static func request(withRouter router: AlamofireRouterProtocol, withHandler handler: @escaping completionHandler) -> Request?  {
         return Alamofire.request(router).responseJSON(completionHandler: { response in
             
             debugPrint(response)
@@ -39,7 +39,7 @@ public class APIRequest {
         }
     }
     
-    public static func responseHandler(JSON: [String : AnyObject]?, router: MovieRouter, completionHandler: APIRequest.completionHandler) {
+    public static func responseHandler(JSON: [String : AnyObject]?, router: AlamofireRouterProtocol, completionHandler: APIRequest.completionHandler) {
         
         if let JSON = JSON {
             let instance: BaseModel = router.responseClass.init(withDictionary: JSON)

@@ -19,8 +19,8 @@ class MovieViewController: UIViewController {
     
     lazy var movieViewModel:MovieViewModel = MovieViewModel(delegate: self)
     let disposeBag = DisposeBag()
-    var querySucess:Bool = false
     
+    var querySucess:Bool = false
     var finishLoading:Bool = false
     
     override func viewDidLoad() {
@@ -30,10 +30,11 @@ class MovieViewController: UIViewController {
         movieViewModel.getMovieList()
         movieViewModel.verifyForRemoveRealmObjects()
         
-        setTableView()
+        setupTableView()
         observeSearchBar()
     }
     
+    //////////////////
     func observeSearchBar() {
         
         searchBar
@@ -59,9 +60,9 @@ class MovieViewController: UIViewController {
     override func onDataDidLoadErrorWithMessage(errorMessage: String) {
         showAlertPopup(title: "Error", message: errorMessage, yes_text: "OK")
     }
-
-    func setTableView() {
-        tableView.register(UINib(nibName:"MovieTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
+    
+    func setupTableView() {
+        tableView.register(UINib(nibName:"MovieTableViewCell", bundle: nil), forCellReuseIdentifier: MovieTableViewCell.identifier)
     }
     
     func pullToRefresh() {
@@ -88,9 +89,11 @@ extension MovieViewController: UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         
-        let cell:MovieTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath) as! MovieTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MovieTableViewCell.identifier, for: indexPath) as? MovieTableViewCell else {
+            fatalError("Wrong Cell")
+        }
+
         cell.setCell(objects:movieViewModel.shownMovie[indexPath.row])
-        
         return cell
     }
 }
