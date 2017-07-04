@@ -21,5 +21,5 @@ public extension String {
 
     public static let segueMovieTableView = "movieTableView"
     public static let segueMovieCollectionView = "movieCollectionView"
-
+    
 }

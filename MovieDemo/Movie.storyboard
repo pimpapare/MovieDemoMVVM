@@ -12,7 +12,7 @@
         <!--TableView-->
         <scene sceneID="rc3-Qe-ShC">
             <objects>
-                <viewController storyboardIdentifier="MovieViewController" id="e0W-nF-2uE" customClass="MovieViewController" customModule="MovieDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MovieTableViewController" id="e0W-nF-2uE" customClass="MovieTableViewController" customModule="MovieDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vrX-MZ-rLf"/>
                         <viewControllerLayoutGuide type="bottom" id="R4w-mf-WUK"/>
@@ -130,7 +130,9 @@
                             <constraint firstItem="3JU-Zz-svX" firstAttribute="leading" secondItem="qet-cR-HlL" secondAttribute="leading" id="pKh-7V-dcn"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="CollectionView" id="euu-ou-rRd"/>
+                    <navigationItem key="navigationItem" title="CollectionView" id="euu-ou-rRd">
+                        <barButtonItem key="rightBarButtonItem" title="Home" id="VUj-o6-utP"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="3JU-Zz-svX" id="cxB-ja-Caq"/>
                     </connections>

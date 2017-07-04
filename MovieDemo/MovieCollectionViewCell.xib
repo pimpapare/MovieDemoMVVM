@@ -21,18 +21,38 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="paW-ih-aaS">
                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                     </imageView>
+                    <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mF1-Hp-ek6">
+                        <rect key="frame" x="0.0" y="70" width="100" height="30"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="tke-W0-nIC"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2xX-45-HcH">
+                        <rect key="frame" x="0.0" y="85.5" width="100" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </view>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="mF1-Hp-ek6" secondAttribute="bottom" id="4N4-py-wNp"/>
                 <constraint firstItem="paW-ih-aaS" firstAttribute="leading" secondItem="GdR-uW-tGz" secondAttribute="leading" id="8LY-i4-gz2"/>
+                <constraint firstAttribute="trailing" secondItem="2xX-45-HcH" secondAttribute="trailing" id="Lsy-IG-vCH"/>
+                <constraint firstAttribute="bottom" secondItem="2xX-45-HcH" secondAttribute="bottom" id="OB3-SH-VNO"/>
+                <constraint firstAttribute="trailing" secondItem="mF1-Hp-ek6" secondAttribute="trailing" id="VXh-vC-RYf"/>
+                <constraint firstItem="mF1-Hp-ek6" firstAttribute="leading" secondItem="GdR-uW-tGz" secondAttribute="leading" id="Wrb-D8-Xbz"/>
                 <constraint firstAttribute="trailing" secondItem="paW-ih-aaS" secondAttribute="trailing" id="chW-4o-FoZ"/>
                 <constraint firstAttribute="bottom" secondItem="paW-ih-aaS" secondAttribute="bottom" id="vRZ-DX-HVy"/>
+                <constraint firstItem="2xX-45-HcH" firstAttribute="leading" secondItem="GdR-uW-tGz" secondAttribute="leading" id="wAP-RL-4iE"/>
                 <constraint firstItem="paW-ih-aaS" firstAttribute="top" secondItem="GdR-uW-tGz" secondAttribute="top" id="wge-8p-ylt"/>
             </constraints>
             <connections>
                 <outlet property="imageCell" destination="paW-ih-aaS" id="xRX-CG-YAs"/>
+                <outlet property="title" destination="2xX-45-HcH" id="LrG-UQ-kGx"/>
             </connections>
-            <point key="canvasLocation" x="-44.5" y="11.5"/>
+            <point key="canvasLocation" x="-45" y="11"/>
         </collectionViewCell>
     </objects>
 </document>

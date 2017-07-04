@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MovieTableViewController.swift
 //  MovieDemo
 //
 //  Created by pimpaporn chaichompoo on 6/5/17.
@@ -12,7 +12,7 @@ import EZSwiftExtensions
 import RxCocoa
 import RxSwift
 
-class MovieViewController: UIViewController {
+class MovieTableViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -33,7 +33,6 @@ class MovieViewController: UIViewController {
         observeSearchBar()
     }
     
-    //////////////////
     func observeSearchBar() {
         
         searchBar
@@ -60,10 +59,6 @@ class MovieViewController: UIViewController {
         showAlertPopup(title: "Error", message: errorMessage, yes_text: "OK")
     }
     
-    func setupTableView() {
-        tableView.register(UINib(nibName: MovieTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: MovieTableViewCell.identifier)
-    }
-    
     func pullToRefresh() {
         self.movieViewModel = MovieViewModel(delegate: self)
         self.movieViewModel.isPullToRefresh = true
@@ -76,28 +71,7 @@ class MovieViewController: UIViewController {
     }
 }
 
-extension MovieViewController: UITableViewDelegate,UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movieViewModel.shownMovie.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-        
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: MovieTableViewCell.identifier, for: indexPath) as? MovieTableViewCell else {
-            fatalError("Wrong Cell")
-        }
-
-        cell.setCell(objects:movieViewModel.shownMovie[indexPath.row])
-        return cell
-    }
-}
-
-extension MovieViewController: UIScrollViewDelegate, EmptyViewDelegate {
+extension MovieTableViewController: UIScrollViewDelegate, EmptyViewDelegate {
     
     func didReload() {
         

@@ -37,14 +37,6 @@ class MovieCollectionViewController: UIViewController {
         showAlertPopup(title: "Error", message: errorMessage, yes_text: "OK")
     }
     
-    func setupCollectionView() {
-        
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: MovieCollectionViewCell.identifier)
-        collectionView.register(UINib(nibName:MovieCollectionViewCell.identifier,bundle:nil), forCellWithReuseIdentifier: MovieCollectionViewCell.identifier)
-    }
-    
     func pullToRefresh() {
         self.movieViewModel = MovieViewModel(delegate: self)
         self.movieViewModel.isPullToRefresh = true
@@ -54,34 +46,6 @@ class MovieCollectionViewController: UIViewController {
     func emptyView() -> UIView? {
         let nibView = Bundle.main.loadNibNamed("EmptyView", owner: nil, options: nil)!.first as! EmptyView
         return nibView
-    }
-}
-
-extension MovieCollectionViewController: UICollectionViewDataSource, UICollectionViewDelegate,UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return movieViewModel.getCollectionCellSize()
-    }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsMake (10,10,10,10)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return movieViewModel.shownMovie.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCollectionViewCell.identifier, for: indexPath) as? MovieCollectionViewCell else {
-            fatalError("Wrong Cell")
-        }        
-        cell.setCell(objects:movieViewModel.shownMovie[indexPath.row])
-        return cell
     }
 }
 

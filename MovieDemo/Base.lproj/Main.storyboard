@@ -31,10 +31,10 @@
             </objects>
             <point key="canvasLocation" x="2206" y="36"/>
         </scene>
-        <!--MovieViewController-->
+        <!--MovieTableViewController-->
         <scene sceneID="Qhb-PJ-pNU">
             <objects>
-                <viewControllerPlaceholder storyboardName="Movie" referencedIdentifier="MovieViewController" id="vbO-tz-15A" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Movie" referencedIdentifier="MovieTableViewController" id="vbO-tz-15A" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GIW-u4-xwd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2765" y="35"/>

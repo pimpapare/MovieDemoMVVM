@@ -20,6 +20,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     }
     
     func setCell(objects:Subscribe) {
+        self.title.text = objects.name
         self.imageCell.moa.url = String(format:"http://image.tmdb.org/t/p/w185/%@",objects.image)
     }
 }
