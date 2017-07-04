@@ -52,17 +52,17 @@ class MovieViewModel: BaseViewModel {
         }
     }
     
+    func getCollectionCellSize() -> CGSize{
+        let cell_size:CGFloat = Constants.deviceWidth/3 - 15
+        return CGSize(width: cell_size, height: cell_size)
+    }
+    
     func getMovieList(){
         
         page = page + 1
         
         let router = AlamofireRouter.getMovieList(api_key: "6c26bbd637c722ffab43dc6984053411",
             sort_by: "popularity.desc", page: page)
-        
-//        let router = Router.getMovieList(
-//            api_key: "6c26bbd637c722ffab43dc6984053411",
-//            sort_by: "popularity.desc",
-//            page: page)
         
         callService(router: router)
     }

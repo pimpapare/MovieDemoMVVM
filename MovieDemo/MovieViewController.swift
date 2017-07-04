@@ -21,7 +21,6 @@ class MovieViewController: UIViewController {
     let disposeBag = DisposeBag()
     
     var querySucess:Bool = false
-    var finishLoading:Bool = false
     
     override func viewDidLoad() {
         
@@ -62,7 +61,7 @@ class MovieViewController: UIViewController {
     }
     
     func setupTableView() {
-        tableView.register(UINib(nibName:"MovieTableViewCell", bundle: nil), forCellReuseIdentifier: MovieTableViewCell.identifier)
+        tableView.register(UINib(nibName: MovieTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: MovieTableViewCell.identifier)
     }
     
     func pullToRefresh() {

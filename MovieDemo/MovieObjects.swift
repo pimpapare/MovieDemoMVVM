@@ -12,8 +12,8 @@ import RealmSwift
 class Subscribe: Object {
     
     dynamic var id = 0
-    dynamic var name = ""
-    dynamic var image = ""
+    dynamic var name = " "
+    dynamic var image = " "
     
     override class func primaryKey() -> String? {
         return "id"
