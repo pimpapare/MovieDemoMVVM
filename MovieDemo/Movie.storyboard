@@ -53,8 +53,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="searchBar" destination="FCw-WI-woF" id="Nw4-OO-sJl"/>
-                        <outlet property="tableView" destination="33p-3d-4Zh" id="Zzc-eg-YTg"/>
+                        <outlet property="searchBar" destination="FCw-WI-woF" id="AWx-fp-GfY"/>
+                        <outlet property="tableView" destination="33p-3d-4Zh" id="Fq1-TK-Dnz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0s8-Tr-MuH" sceneMemberID="firstResponder"/>

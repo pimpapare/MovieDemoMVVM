@@ -17,25 +17,25 @@ extension UIViewController{
     }
 }
 
-extension UIViewController: BaseViewModelDelegate {
-    
-    public func testChangingName(){
-        
-    }
-
-    public func showLoading() {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-    }
-    
-    public func hideLoading() {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-    }
-    
-    public func onDataDidLoad() {
-        
-    }
-    
-    public func onDataDidLoadErrorWithMessage(errorMessage: String) {
-        
-    }
-}
+//extension UIViewController: BaseViewModelDelegate {
+//    
+//    public func testChangingName(){
+//        
+//    }
+//
+//    public func showLoading() {
+//        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+//    }
+//    
+//    public func hideLoading() {
+//        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+//    }
+//    
+//    public func onDataDidLoad() {
+//        
+//    }
+//    
+//    public func onDataDidLoadErrorWithMessage(errorMessage: String) {
+//        
+//    }
+//}

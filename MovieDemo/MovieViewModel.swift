@@ -2,102 +2,72 @@
 //  MovieViewModel.swift
 //  MovieDemo
 //
-//  Created by pimpaporn chaichompoo on 6/5/17.
+//  Created by pimpaporn chaichompoo on 7/5/17.
 //  Copyright © 2017 Pimpaporn Chaichompoo. All rights reserved.
 //
 
-import Foundation
-import Alamofire
+import UIKit
 
-import RxCocoa
-import RxSwift
-
-class MovieViewModel: BaseViewModel {
+class MovieViewModel {
     
-    var allMovies:[Subscribe] = [Subscribe]()
-    //:[[String:AnyObject]] = [[String:AnyObject]]()
-    var shownMovie:[Subscribe] = [Subscribe]()
-    //:[[String:AnyObject]] = [[String:AnyObject]]()
+    var viewInterfaceProtocol:MovieTableViewControllerProtocol!
+    var modelProtocol:MovieModelProtocol!
+    var model:MovieModel = MovieModel()
     
-    var realmObjects:RealmObjects = RealmObjects()
     let baseFunction:BaseFunction = BaseFunction()
-    
-    var isPullToRefresh:Bool = false
-    var limit: Int?
-    var offset: Int?
     var page: Int! = 0
     
-    func setMovie() -> [Subscribe]{
-        
-        // Sort objects not good for sperating toload object from API
-        //shownMovie = realmObjects.getMovieObjectsWithSortName()
-      
-        shownMovie = realmObjects.getMovieObjects()
-        allMovies = shownMovie
-        
-        return shownMovie
+    required init(view:MovieTableViewControllerProtocol, viewControllerModel:MovieModelProtocol) {
+        self.viewInterfaceProtocol = view
+        self.modelProtocol = viewControllerModel
     }
     
-    func queryData(query:String, completionHandler: @escaping (Bool) -> ()){
-        
-        shownMovie = allMovies.filter {
-            return $0.name.range(of: query) != nil
-        }
-        
-        if shownMovie.isEmpty {
-            shownMovie = allMovies
-            completionHandler(false)
-        } else {
-            completionHandler(true)
-        }
+    func getShownMovie() -> [Subscribe]{
+        return model.getMovieObject()
     }
     
-    func getCollectionCellSize() -> CGSize{
-        let cell_size:CGFloat = Constants.deviceWidth/3 - 15
-        return CGSize(width: cell_size, height: cell_size)
-    }
-    
-    func getMovieList(){
+    func getMovieList() {
         
         page = page + 1
-        
         let router = AlamofireRouter.getMovieList(api_key: "6c26bbd637c722ffab43dc6984053411",
-            sort_by: "popularity.desc", page: page)
+                                                  sort_by: "popularity.desc", page: page)
         
-        callService(router: router)
-    }
-    
-    func callService(router:AlamofireRouter) {
-        _ = APIRequest.request(withRouter: router, withHandler: getListMovieHandler())
-    }
-    
-    func getListMovieHandler() -> APIRequest.completionHandler {
-        
-        return { [weak self] (response, error) in
+        self.modelProtocol.getMovieList(router: router) { (result,error) in
             
-            if let response = response as? MovieModel {
+            if let e = error {
+                self.viewInterfaceProtocol.onDataDidLoadErrorWithMessage(errorMessage: e.localizedDescription)
+            }else{
                 
-                for newDic in response.movies!  {
-                    self?.setMovieObjectToRealm(id: newDic["id"] as? Int ?? 0, name: newDic["title"] as? String ?? "", image: newDic["backdrop_path"] as? String ?? "")
+                for newDic in (result?.movies)! {
+                    self.modelProtocol.setMovieObjectToRealm(dic: newDic)
                 }
-
-                self?.delegate?.onDataDidLoad()
-                self?.delegate?.testChangingName()
                 
-            } else {
-                self?.delegate?.onDataDidLoadErrorWithMessage(errorMessage: (error?.localizedDescription)!)
+                //                self.modelProtocol.setMovieObject()
+                self.viewInterfaceProtocol.reloadWithData(newData: self.model.getMovieObject())
+                self.viewInterfaceProtocol.onDataDidLoad()
             }
         }
     }
     
-    func setMovieObjectToRealm(id:Int, name:String, image:String){
-        realmObjects.writeMovieObject(id: id, name: name, image: image)
+    func verifyScaleForReloadData(distance:CGFloat, querySucess:Bool){
+        
+        if distance < 150 && querySucess == false{
+            self.getMovieList()
+        }
     }
     
-    func verifyForRemoveRealmObjects(){
+    func verifyForRemoveRealmObjects(forceRemove:Bool){
         
-        if baseFunction.isInternetAvailable() {
-            realmObjects.removeMovieObjects()
+        if baseFunction.isInternetAvailable() || forceRemove == true{
+            model.removeRealmObjects()
+        }
+    }
+    
+    func verifyQueryData(query:String, completionHandler: @escaping (Bool) -> ()){
+        
+        model.queryData(query: query) { (result,Bool) in
+            self.viewInterfaceProtocol.reloadWithData(newData: result)
+            completionHandler(Bool)
         }
     }
 }

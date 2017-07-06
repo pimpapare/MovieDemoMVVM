@@ -13,7 +13,7 @@ extension AlamofireRouter {
     public var responseClass: BaseModel.Type {
         switch self {
         case .getMovieList:
-            return MovieModel.self
+            return MovieObjects.self
         }
     }
 }

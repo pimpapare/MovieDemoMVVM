@@ -19,7 +19,7 @@ extension MovieTableViewController: UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movieViewModel.shownMovie.count
+        return movieList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
@@ -28,7 +28,7 @@ extension MovieTableViewController: UITableViewDelegate,UITableViewDataSource {
             fatalError("Wrong Cell")
         }
         
-        cell.setCell(objects:movieViewModel.shownMovie[indexPath.row])
+        cell.setCell(objects:movieList[indexPath.row])
         return cell
     }
 }

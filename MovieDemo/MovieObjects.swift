@@ -1,36 +1,40 @@
 //
 //  MovieObjects.swift
-//  MovieObjects
+//  MovieDemo
 //
-//  Created by pimpaporn chaichompoo on 6/11/17.
+//  Created by pimpaporn chaichompoo on 6/5/17.
 //  Copyright © 2017 Pimpaporn Chaichompoo. All rights reserved.
 //
 
-import UIKit
-import RealmSwift
+import Foundation
 
-class Subscribe: Object {
+class MovieObjects: BaseModel {
     
-    dynamic var id = 0
-    dynamic var name = " "
-    dynamic var image = " "
+    var movies:[[String:AnyObject]]?
     
-    override class func primaryKey() -> String? {
-        return "id"
+    var id : String!
+    var itemName : String!
+    var itemImage : String!
+    
+    var nextMovieIndex: Int? = 0
+    var nextMovieAvailable: Bool?
+    
+    required init(withDictionary dict: [String:AnyObject]) {
+        super.init(withDictionary: dict)
+        self.movies = dict["results"] as? [[String : AnyObject]]
+        self.nextMovieAvailable = true
+    }
+    
+    func getMovieValue(at index:Int, key:String) -> String{
+        let getName = MovieValue.init(movies: movies)
+        return getName[index,key] as? String ?? " "
     }
 }
 
-extension Results {
+struct MovieValue {
     
-    func toArray<T>(ofType: T.Type) -> [T] {
-        
-        var array = [T]()
-        
-        for i in 0 ..< count {
-            if let result = self[i] as? T {
-                array.append(result)
-            }
-        }
-        return array
+    var movies:[[String:AnyObject]]?
+    subscript (_ index:Int,_ key:String) -> AnyObject?{
+        return movies?[index][key]
     }
 }

@@ -1,6 +1,6 @@
 //
 //  RealmObjects.swift
-//  MapSearchDemo
+//  MovieDemo
 //
 //  Created by pimpaporn chaichompoo on 6/11/17.
 //  Copyright © 2017 Pimpaporn Chaichompoo. All rights reserved.

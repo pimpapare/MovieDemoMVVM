@@ -7,20 +7,19 @@
 //
 
 import XCTest
-import Mockingjay
 
 @testable import MovieDemo
 
 class MovieDemoTests: XCTestCase {
     
     var moviewViewModel:MovieViewModel!
-    var movieViewController:MovieViewController!
+    var movieTableViewController:MovieTableViewController!
     
     override func setUp() {
         super.setUp()
         
-        movieViewController = MovieViewController()
-        moviewViewModel = MovieViewModel(delegate: movieViewController)
+        movieTableViewController = MovieTableViewController()
+        moviewViewModel = MovieViewModel(delegate: movieTableViewController)
     }
     
     override func tearDown() {
@@ -40,39 +39,39 @@ class MovieDemoTests: XCTestCase {
         }
     }
     
-    func testTopCollectionViewInLandscapeRight() {
-        
-        let value = UIInterfaceOrientation.landscapeRight.rawValue
-        UIDevice.current.setValue(value, forKey: "orientation")
-
-        let result = moviewViewModel.sizeForTopOfCollectionView()
-        XCTAssertEqual(result, 0)
-    }
-    
-    func testTopCollectionViewInLandscapeLeft() {
-        
-        let value = UIInterfaceOrientation.landscapeLeft.rawValue
-        UIDevice.current.setValue(value, forKey: "orientation")
-        
-        let result = moviewViewModel.sizeForTopOfCollectionView()
-        XCTAssertEqual(result, 0)
-    }
-    
-    func testTopCollectionViewInPortrait() {
-        
-        let value = UIInterfaceOrientation.portrait.rawValue
-        UIDevice.current.setValue(value, forKey: "orientation")
-        
-        let result = moviewViewModel.sizeForTopOfCollectionView()
-        XCTAssertEqual(result, 20)
-    }
-    
-    func testTopCollectionViewInPortraitUpsideDown() {
-        
-        let value = UIInterfaceOrientation.portraitUpsideDown.rawValue
-        UIDevice.current.setValue(value, forKey: "orientation")
-        
-        let result = moviewViewModel.sizeForTopOfCollectionView()
-        XCTAssertEqual(result, 20)
-    }
+//    func testTopCollectionViewInLandscapeRight() {
+//        
+//        let value = UIInterfaceOrientation.landscapeRight.rawValue
+//        UIDevice.current.setValue(value, forKey: "orientation")
+//
+//        let result = moviewViewModel.sizeForTopOfCollectionView()
+//        XCTAssertEqual(result, 0)
+//    }
+//    
+//    func testTopCollectionViewInLandscapeLeft() {
+//        
+//        let value = UIInterfaceOrientation.landscapeLeft.rawValue
+//        UIDevice.current.setValue(value, forKey: "orientation")
+//        
+//        let result = moviewViewModel.sizeForTopOfCollectionView()
+//        XCTAssertEqual(result, 0)
+//    }
+//    
+//    func testTopCollectionViewInPortrait() {
+//        
+//        let value = UIInterfaceOrientation.portrait.rawValue
+//        UIDevice.current.setValue(value, forKey: "orientation")
+//        
+//        let result = moviewViewModel.sizeForTopOfCollectionView()
+//        XCTAssertEqual(result, 20)
+//    }
+//    
+//    func testTopCollectionViewInPortraitUpsideDown() {
+//        
+//        let value = UIInterfaceOrientation.portraitUpsideDown.rawValue
+//        UIDevice.current.setValue(value, forKey: "orientation")
+//        
+//        let result = moviewViewModel.sizeForTopOfCollectionView()
+//        XCTAssertEqual(result, 20)
+//    }
 }

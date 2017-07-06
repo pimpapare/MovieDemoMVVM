@@ -1,8 +1,8 @@
 //
-//  MovieTableViewController.swift
-//  MovieDemo
+//  MovieViewController.swift
+//  MovieDemoCleanSwift
 //
-//  Created by pimpaporn chaichompoo on 6/5/17.
+//  Created by pimpaporn chaichompoo on 7/3/17.
 //  Copyright © 2017 Pimpaporn Chaichompoo. All rights reserved.
 //
 
@@ -12,24 +12,30 @@ import EZSwiftExtensions
 import RxCocoa
 import RxSwift
 
-class MovieTableViewController: UIViewController {
+protocol MovieTableViewControllerProtocol {
     
-    @IBOutlet weak var tableView: UITableView!
+    func onDataDidLoad()
+    func onDataDidLoadErrorWithMessage(errorMessage: String)
+    func reloadData()
+    func reloadWithData(newData:[Subscribe])
+}
+
+class MovieTableViewController: UIViewController, MovieTableViewControllerProtocol {
+    
     @IBOutlet weak var searchBar: UISearchBar!
-    
-    lazy var movieViewModel:MovieViewModel = MovieViewModel(delegate: self)
-    let disposeBag = DisposeBag()
+    @IBOutlet weak var tableView: UITableView!
     
     var querySucess:Bool = false
+    var movieViewModel:MovieViewModel!
+    let disposeBag = DisposeBag()
+    var movieList:[Subscribe] = [Subscribe]()
     
     override func viewDidLoad() {
         
-        super.viewDidLoad()
-        
-        movieViewModel.getMovieList()
-        movieViewModel.verifyForRemoveRealmObjects()
-        
         setupTableView()
+        movieViewModel = MovieViewModel(view: self, viewControllerModel: MovieModel())
+        movieViewModel.verifyForRemoveRealmObjects(forceRemove: true)
+        movieViewModel.getMovieList()
         observeSearchBar()
     }
     
@@ -42,27 +48,28 @@ class MovieTableViewController: UIViewController {
             .distinctUntilChanged()
             .subscribe(onNext: { [unowned self] query in
                 
-                self.movieViewModel.queryData(query: query, completionHandler: { (success) in
+                self.movieViewModel.verifyQueryData(query: query, completionHandler: { (success) in
                     self.querySucess = success
                     self.tableView.reloadData()
                 })
-                
             })
             .addDisposableTo(disposeBag)
     }
     
-    override func onDataDidLoad() {
-        didReload()
+    func onDataDidLoad() {
+        self.tableView.reloadData()
     }
     
-    override func onDataDidLoadErrorWithMessage(errorMessage: String) {
+    func onDataDidLoadErrorWithMessage(errorMessage: String) {
         showAlertPopup(title: "Error", message: errorMessage, yes_text: "OK")
     }
     
-    func pullToRefresh() {
-        self.movieViewModel = MovieViewModel(delegate: self)
-        self.movieViewModel.isPullToRefresh = true
-        self.movieViewModel.getMovieList()
+    func reloadData() {
+        movieViewModel.getMovieList()
+    }
+    
+    func reloadWithData(newData:[Subscribe]){
+        movieList = newData
     }
     
     func emptyView() -> UIView? {
@@ -73,21 +80,21 @@ class MovieTableViewController: UIViewController {
 
 extension MovieTableViewController: UIScrollViewDelegate, EmptyViewDelegate {
     
-    func didReload() {
-        
-        if movieViewModel.setMovie().count == 0 {
-            self.view.addSubview(self.emptyView()!)
-        }
-        
+    func addEmptyView() {
+        self.view.addSubview(self.emptyView()!)
+    }
+    
+    func removeEmptyView() {
         self.emptyView()?.removeFromSuperview()
+    }
+    
+    func didReload() {
         self.tableView.reloadData()
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        let distance = scrollView.contentSize.height - (targetContentOffset.pointee.y + scrollView.bounds.height)
         
-        if distance < 150 && querySucess == false{
-            self.movieViewModel.getMovieList()
-        }
+        let distance = scrollView.contentSize.height - (targetContentOffset.pointee.y + scrollView.bounds.height)
+        movieViewModel.verifyScaleForReloadData(distance: distance, querySucess: querySucess)
     }
 }
