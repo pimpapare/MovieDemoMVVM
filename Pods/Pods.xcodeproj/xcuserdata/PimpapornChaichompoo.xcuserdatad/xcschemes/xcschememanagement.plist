@@ -19,17 +19,22 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Mockit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>ObjectMapper.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-MovieDemo.xcscheme</key>
+		<key>Pods-MovieDemo-MovieDemoTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-MovieDemoTests.xcscheme</key>
+		<key>Pods-MovieDemo.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -64,6 +69,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SwiftHamcrest.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>moa.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -73,11 +83,6 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>08F18887BEA3B75806DAE323C006737F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>2B719266374305B8D9B64636FE49999B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -97,7 +102,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>82144AA2EAE5F8851DB3FE1EFE69E034</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>82C7FC6824BE0DCEC56A0C32309C9DDF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>834859CFB725A9D08D67BB3712155708</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -123,6 +138,11 @@
 			<true/>
 		</dict>
 		<key>C099C88AB7DE9CC031BA459E11303913</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F50AAAE11A8366ED6F9BEEEDB3B4410B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

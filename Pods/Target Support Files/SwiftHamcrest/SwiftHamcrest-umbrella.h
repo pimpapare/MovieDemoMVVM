@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_MovieDemoTestsVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_MovieDemoTestsVersionString[];
+FOUNDATION_EXPORT double HamcrestVersionNumber;
+FOUNDATION_EXPORT const unsigned char HamcrestVersionString[];
 

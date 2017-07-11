@@ -7,71 +7,127 @@
 //
 
 import XCTest
+import Mockit
+import Hamcrest
+import Alamofire
 
 @testable import MovieDemo
 
+class MockMovieInterfaceProtocol : MovieTableViewControllerProtocol, Mock {
+    
+    var callHandler: CallHandler
+    
+    init(testCase: XCTestCase) {
+        callHandler = CallHandlerImpl(withTestCase: testCase)
+    }
+    
+    func instanceType() -> MockMovieInterfaceProtocol {
+        return self
+    }
+    
+    func onDataDidLoad() {
+        let _ = callHandler.accept(nil, ofFunction: #function, atFile: #file, inLine: #line, withArgs: nil)
+    }
+    
+    func onDataDidLoadErrorWithMessage(errorMessage: String) {
+        let _ = callHandler.accept(nil, ofFunction: #function, atFile: #file, inLine: #line, withArgs: nil)
+    }
+    
+    func reloadWithData(newData:[Subscribe]) {
+        let _ = callHandler.accept(nil, ofFunction: #function, atFile: #file, inLine: #line, withArgs: newData)
+    }
+}
+
 class MovieDemoTests: XCTestCase {
     
-    var moviewViewModel:MovieViewModel!
-    var movieTableViewController:MovieTableViewController!
+    var mockModel: MockMovieModel! // model
+    var movieViewModel: MovieViewModel! // view model
+    var mockMovieInterfaceProtocol: MockMovieInterfaceProtocol! // protocol
     
     override func setUp() {
         super.setUp()
         
-        movieTableViewController = MovieTableViewController()
-        moviewViewModel = MovieViewModel(delegate: movieTableViewController)
+        mockModel = MockMovieModel(testCase: self)
+        mockMovieInterfaceProtocol = MockMovieInterfaceProtocol(testCase: self)
+        movieViewModel = MovieViewModel(view: mockMovieInterfaceProtocol, viewControllerModel: mockModel)
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
+    func testCallOnDataDidLoad() {
+        
+        let router = AlamofireRouter.getMovieList(api_key: AnyValue.string,
+                                                  sort_by: AnyValue.string, page: AnyValue.int)
+        
+        movieViewModel.getMovieList()
+        mockModel.verify(verificationMode: Once()).getMovieList(router: router, completion: { _ in })
+        //mockModel.verify(verificationMode: Never()).getMovieList(router: router, completion: { _ in })
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testResultOnDataDidLoadResponse() {
+        
+        let router = AlamofireRouter.getMovieList(api_key: AnyValue.string,
+                                                  sort_by: AnyValue.string, page: AnyValue.int)
+        
+        let _ = mockModel.when().call(withReturnValue: mockModel.getMovieList(router: router, completion: { (result,error) in
+            let stringJson = "[[\"success\": 1]]"
+            assertThat("\(String(describing: (result?.movies)!))", equalTo(stringJson))
+        }))
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testCallOnDataDidLoadErrorWithMessage(errorMessage: String) {
+        
+
+    }
+    
+    func testResultOnDataDidLoadErrorWithMessage(errorMessage: String) {
+        
+        
+    }
+    
+    func testReloadWithData(newData:[Subscribe]) {
+        
+        movieViewModel.verifyQueryData(query: AnyValue.string) { (success) in
+            self.mockMovieInterfaceProtocol.verify(verificationMode: Once()).reloadWithData(newData:[Subscribe{}])
         }
     }
     
-//    func testTopCollectionViewInLandscapeRight() {
-//        
-//        let value = UIInterfaceOrientation.landscapeRight.rawValue
-//        UIDevice.current.setValue(value, forKey: "orientation")
-//
-//        let result = moviewViewModel.sizeForTopOfCollectionView()
-//        XCTAssertEqual(result, 0)
-//    }
-//    
-//    func testTopCollectionViewInLandscapeLeft() {
-//        
-//        let value = UIInterfaceOrientation.landscapeLeft.rawValue
-//        UIDevice.current.setValue(value, forKey: "orientation")
-//        
-//        let result = moviewViewModel.sizeForTopOfCollectionView()
-//        XCTAssertEqual(result, 0)
-//    }
-//    
-//    func testTopCollectionViewInPortrait() {
-//        
-//        let value = UIInterfaceOrientation.portrait.rawValue
-//        UIDevice.current.setValue(value, forKey: "orientation")
-//        
-//        let result = moviewViewModel.sizeForTopOfCollectionView()
-//        XCTAssertEqual(result, 20)
-//    }
-//    
-//    func testTopCollectionViewInPortraitUpsideDown() {
-//        
-//        let value = UIInterfaceOrientation.portraitUpsideDown.rawValue
-//        UIDevice.current.setValue(value, forKey: "orientation")
-//        
-//        let result = moviewViewModel.sizeForTopOfCollectionView()
-//        XCTAssertEqual(result, 20)
-//    }
+    func testResponseQueryData() {
+        
+        let testString = "wonder women"
+        
+        movieViewModel.verifyQueryData(query: testString) { (success) in
+            self.mockModel.queryData(query: testString, completionHandler: { (result, success2) in
+                assertThat("\(String(describing: (success2)))", equalTo("true"))
+            })
+        }
+    }
+    
+    func testCallQueryData() {
+        
+        movieViewModel.verifyQueryData(query: AnyValue.string) { (success) in
+            self.mockModel.queryData(query: AnyValue.string, completionHandler: { (result, success2) in
+                self.mockModel.verify(verificationMode: Once()).queryData(query: AnyValue.string, completionHandler: { _ in })
+            })
+        }
+    }
+    
+    func testVerifyScaleForReloadData(){
+        
+        movieViewModel.verifyScaleForReloadData(distance: 149, querySucess: false)
+
+        let router = AlamofireRouter.getMovieList(api_key: AnyValue.string,
+                                                  sort_by: AnyValue.string, page: AnyValue.int)
+        self.mockModel.verify(verificationMode: Once()).getMovieList(router: router, completion: { _ in })
+    }
+    
+    func testVerifyForRemoveRealmObjects(){
+        
+        movieViewModel.verifyForRemoveRealmObjects(forceRemove: true)
+        self.mockModel.verify(verificationMode: Once()).removeRealmObjects()
+    }
+    
+    func testGetShownMovie(){
+
+        _ = movieViewModel.getShownMovie()
+        self.mockModel.verify(verificationMode: Once()).getMovieObject()
+    }
 }

@@ -12,92 +12,67 @@ import Alamofire
 import RxCocoa
 import RxSwift
 
-class MovieViewModel: BaseViewModel {
+protocol MovieModelProtocol {
+    func getMovieList(router:AlamofireRouter, completion: @escaping (_ result: MovieObjects?, _ error: Error?) -> Void)
+    func getMovieObject() -> [Subscribe]
+    func setMovieObjectToRealm(dic:[String:AnyObject])
+    func removeRealmObjects()
+    func queryData(query:String, completionHandler: @escaping ([Subscribe],Bool) -> ())
+}
+
+class MovieModel: MovieModelProtocol {
     
     var allMovies:[Subscribe] = [Subscribe]()
-    //:[[String:AnyObject]] = [[String:AnyObject]]()
     var shownMovie:[Subscribe] = [Subscribe]()
-    //:[[String:AnyObject]] = [[String:AnyObject]]()
     
     var realmObjects:RealmObjects = RealmObjects()
-    let baseFunction:BaseFunction = BaseFunction()
     
-    var isPullToRefresh:Bool = false
-    var limit: Int?
-    var offset: Int?
-    var page: Int! = 0
-    
-    func setMovie() -> [Subscribe]{
+    func getMovieList(router:AlamofireRouter, completion: @escaping (_ result: MovieObjects?, _ error: Error?) -> Void){
         
-        // Sort objects not good for sperating toload object from API
-        //shownMovie = realmObjects.getMovieObjectsWithSortName()
-      
+        _ = APIRequest.request(withRouter: router, withHandler: { [weak self] (response, error) in
+            
+            if let response = response as? MovieObjects {
+                
+                if response.statusService == false {
+                    let errorTemp = NSError(domain: response.statusMessage ?? " ", code: 404, userInfo: nil)
+                    completion(nil, errorTemp)
+                }else{
+                    completion(response, nil)
+                }
+            } else {
+                completion(nil, error)
+            }
+        })
+    }
+    
+    func setMovieObjectToRealm(dic:[String:AnyObject]){
+        
+        realmObjects.writeMovieObject(id: dic["id"] as? Int ?? 0
+            , name: dic["title"] as? String ?? "", image: dic["backdrop_path"] as? String ?? "")
+    }
+    
+    func getMovieObject() -> [Subscribe]{
+        
         shownMovie = realmObjects.getMovieObjects()
         allMovies = shownMovie
         
         return shownMovie
     }
     
-    func queryData(query:String, completionHandler: @escaping (Bool) -> ()){
+    func removeRealmObjects(){
+        realmObjects.removeMovieObjects()
+    }
+    
+    func queryData(query:String, completionHandler: @escaping ([Subscribe],Bool) -> ()){
         
         shownMovie = allMovies.filter {
             return $0.name.range(of: query) != nil
         }
         
         if shownMovie.isEmpty {
-            shownMovie = allMovies
-            completionHandler(false)
+            completionHandler(allMovies,false)
         } else {
-            completionHandler(true)
-        }
-    }
-    
-    func getCollectionCellSize() -> CGSize{
-        let cell_size:CGFloat = Constants.deviceWidth/3 - 15
-        return CGSize(width: cell_size, height: cell_size)
-    }
-    
-    func getMovieList(){
-        
-        page = page + 1
-        
-        let router = AlamofireRouter.getMovieList(api_key: "6c26bbd637c722ffab43dc6984053411",
-            sort_by: "popularity.desc", page: page)
-        
-        callService(router: router)
-    }
-    
-    func callService(router:AlamofireRouter) {
-        _ = APIRequest.request(withRouter: router, withHandler: getListMovieHandler())
-    }
-    
-    func getListMovieHandler() -> APIRequest.completionHandler {
-        
-        return { [weak self] (response, error) in
-            
-            if let response = response as? MovieModel {
-                
-                for newDic in response.movies!  {
-                    self?.setMovieObjectToRealm(id: newDic["id"] as? Int ?? 0, name: newDic["title"] as? String ?? "", image: newDic["backdrop_path"] as? String ?? "")
-                }
-
-                self?.delegate?.onDataDidLoad()
-                self?.delegate?.testChangingName()
-                
-            } else {
-                self?.delegate?.onDataDidLoadErrorWithMessage(errorMessage: (error?.localizedDescription)!)
-            }
-        }
-    }
-    
-    func setMovieObjectToRealm(id:Int, name:String, image:String){
-        realmObjects.writeMovieObject(id: id, name: name, image: image)
-    }
-    
-    func verifyForRemoveRealmObjects(){
-        
-        if baseFunction.isInternetAvailable() {
-            realmObjects.removeMovieObjects()
+            completionHandler(shownMovie,true)
         }
     }
 }

@@ -17,12 +17,14 @@ target 'MovieDemo' do
     pod 'RxAlamofire'
     
     # Pods for MovieDemo
-    
-    target 'MovieDemoTests' do
-        inherit! :search_paths
-        # Pods for testing
+    target 'MovieDemoTests' do        
+        platform :ios, '9.0'
+        pod 'RxAlamofire'
+        pod 'AlamofireObjectMapper'
+        pod 'Alamofire', '~> 4.3'
+        pod 'Mockit'
+        pod 'SwiftHamcrest'
     end
-    
     target 'MovieDemoUITests' do
         inherit! :search_paths
         # Pods for testing

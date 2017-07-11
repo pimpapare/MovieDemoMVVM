@@ -38,11 +38,13 @@ class MovieViewModel {
                 self.viewInterfaceProtocol.onDataDidLoadErrorWithMessage(errorMessage: e.localizedDescription)
             }else{
                 
-                for newDic in (result?.movies)! {
-                    self.modelProtocol.setMovieObjectToRealm(dic: newDic)
+                if let resultMovie = result?.movies{
+                    for newDic in resultMovie {
+                        self.modelProtocol.setMovieObjectToRealm(dic: newDic)
+                    }
                 }
                 
-                //                self.modelProtocol.setMovieObject()
+                //self.modelProtocol.setMovieObject()
                 self.viewInterfaceProtocol.reloadWithData(newData: self.model.getMovieObject())
                 self.viewInterfaceProtocol.onDataDidLoad()
             }

@@ -16,7 +16,6 @@ protocol MovieTableViewControllerProtocol {
     
     func onDataDidLoad()
     func onDataDidLoadErrorWithMessage(errorMessage: String)
-    func reloadData()
     func reloadWithData(newData:[Subscribe])
 }
 
@@ -62,10 +61,6 @@ class MovieTableViewController: UIViewController, MovieTableViewControllerProtoc
     
     func onDataDidLoadErrorWithMessage(errorMessage: String) {
         showAlertPopup(title: "Error", message: errorMessage, yes_text: "OK")
-    }
-    
-    func reloadData() {
-        movieViewModel.getMovieList()
     }
     
     func reloadWithData(newData:[Subscribe]){
