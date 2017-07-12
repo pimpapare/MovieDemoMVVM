@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class Subscribe: Object {
+class SubscribeMovie: Object {
     
     dynamic var id = 0
     dynamic var name = " "

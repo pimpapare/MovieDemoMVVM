@@ -10,7 +10,9 @@ import Alamofire
 
 public protocol AlamofireRouterProtocol: URLRequestConvertible {
     
-    var baseURL: String { get }
+    var baseURLMovie: String { get }
+    var baseURLPlace: String { get }
+    
     var path: String { get }
     var method: Alamofire.HTTPMethod { get }
     var headers: [String: String]? { get }

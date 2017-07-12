@@ -17,7 +17,7 @@ public class APIRequest {
         return Alamofire.request(router).responseJSON(completionHandler: { response in
             
             debugPrint(response)
-            
+
             let statusCode = response.response?.statusCode
             
             switch response.result {

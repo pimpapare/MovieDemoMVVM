@@ -15,6 +15,8 @@ extension AlamofireRouter {
         switch self {
         case .getMovieList:
             return nil
+        case .getPlaceList:
+            return ["Authorization": "170d341f4ebb62a386fb2ae64436390749917e5d"]
         }
     }
 }

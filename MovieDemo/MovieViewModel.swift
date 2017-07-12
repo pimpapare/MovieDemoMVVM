@@ -22,7 +22,7 @@ class MovieViewModel {
         self.modelProtocol = viewControllerModel
     }
     
-    func getShownMovie() -> [Subscribe]{
+    func getShownMovie() -> [SubscribeMovie]{
         return model.getMovieObject()
     }
     

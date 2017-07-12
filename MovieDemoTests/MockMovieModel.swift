@@ -33,12 +33,12 @@ class MockMovieModel: MovieModel,Mock {
         let _ = callHandler.accept(nil, ofFunction: #function, atFile: #file, inLine: #line, withArgs: dic)
     }
     
-    override func getMovieObject() -> [Subscribe] {
-        return [Subscribe]()
+    override func getMovieObject() -> [SubscribeMovie] {
+        return [SubscribeMovie]()
     }
     
-    override func queryData(query:String, completionHandler: @escaping ([Subscribe],Bool) -> ()) {
-        let object:[Subscribe] = [Subscribe()]
+    override func queryData(query:String, completionHandler: @escaping ([SubscribeMovie],Bool) -> ()) {
+        let object:[SubscribeMovie] = [SubscribeMovie()]
         _ = callHandler.accept(completionHandler(object, true), ofFunction: #function, atFile: #file, inLine: #line, withArgs: nil)
     }
 }

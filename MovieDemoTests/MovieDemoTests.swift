@@ -33,7 +33,7 @@ class MockMovieInterfaceProtocol : MovieTableViewControllerProtocol, Mock {
         let _ = callHandler.accept(nil, ofFunction: #function, atFile: #file, inLine: #line, withArgs: nil)
     }
     
-    func reloadWithData(newData:[Subscribe]) {
+    func reloadWithData(newData:[SubscribeMovie]) {
         let _ = callHandler.accept(nil, ofFunction: #function, atFile: #file, inLine: #line, withArgs: newData)
     }
 }
@@ -83,10 +83,10 @@ class MovieDemoTests: XCTestCase {
         
     }
     
-    func testReloadWithData(newData:[Subscribe]) {
+    func testReloadWithData(newData:[SubscribeMovie]) {
         
         movieViewModel.verifyQueryData(query: AnyValue.string) { (success) in
-            self.mockMovieInterfaceProtocol.verify(verificationMode: Once()).reloadWithData(newData:[Subscribe{}])
+            self.mockMovieInterfaceProtocol.verify(verificationMode: Once()).reloadWithData(newData:[SubscribeMovie{}])
         }
     }
     

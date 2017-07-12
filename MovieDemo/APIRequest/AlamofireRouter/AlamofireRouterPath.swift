@@ -15,6 +15,8 @@ extension AlamofireRouter {
         switch self {
         case .getMovieList:
             return "movie"
+        case .getPlaceList:
+            return "allplace"
         }
     }
 }

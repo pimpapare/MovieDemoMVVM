@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="MovieCollectionViewCell" reuseIdentifier="MovieCollectionViewCell" id="GdR-uW-tGz" customClass="MovieCollectionViewCell" customModule="MovieDemo" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="PlaceCollectionViewCell" reuseIdentifier="PlaceCollectionViewCell" id="GdR-uW-tGz" customClass="PlaceCollectionViewCell" customModule="MovieDemo" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -20,6 +20,7 @@
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="paW-ih-aaS">
                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </imageView>
                     <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mF1-Hp-ek6">
                         <rect key="frame" x="0.0" y="70" width="100" height="30"/>
@@ -49,8 +50,8 @@
                 <constraint firstItem="paW-ih-aaS" firstAttribute="top" secondItem="GdR-uW-tGz" secondAttribute="top" id="wge-8p-ylt"/>
             </constraints>
             <connections>
-                <outlet property="imageCell" destination="paW-ih-aaS" id="xRX-CG-YAs"/>
-                <outlet property="title" destination="2xX-45-HcH" id="LrG-UQ-kGx"/>
+                <outlet property="imageCell" destination="paW-ih-aaS" id="b8R-Il-Bv6"/>
+                <outlet property="title" destination="2xX-45-HcH" id="WIg-nx-eg6"/>
             </connections>
             <point key="canvasLocation" x="-45" y="11"/>
         </collectionViewCell>

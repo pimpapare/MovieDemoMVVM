@@ -1,5 +1,5 @@
 //
-//  RealmObjects.swift
+//  MovieRealmObjects.swift
 //  MovieDemo
 //
 //  Created by pimpaporn chaichompoo on 6/11/17.
@@ -9,13 +9,13 @@
 import UIKit
 import RealmSwift
 
-class RealmObjects: NSObject {
+class MovieRealmObjects: NSObject {
 
     let realm = try! Realm()
     
     func writeMovieObject(id:Int, name:String, image:String){
         
-        let subscribe = Subscribe()
+        let subscribe = SubscribeMovie()
         
         try! realm.write {
             
@@ -30,21 +30,21 @@ class RealmObjects: NSObject {
     func removeMovieObjects(){
         
         try! realm.write {
-            realm.delete(realm.objects(Subscribe.self))
+            realm.delete(realm.objects(SubscribeMovie.self))
         }
     }
     
-    func getMovieObjects() -> [Subscribe]{
+    func getMovieObjects() -> [SubscribeMovie]{
         
 //        guard realm.objects(Subscribe.self).first != nil else {
 //            return getMovieObjects()
 //        }
         
-        let objects = realm.objects(Subscribe.self).toArray(ofType : Subscribe.self) as [Subscribe]
+        let objects = realm.objects(SubscribeMovie.self).toArray(ofType : SubscribeMovie.self) as [SubscribeMovie]
         return objects
     }
     
-    func getMovieObjectsWithSortName() -> [Subscribe]{
+    func getMovieObjectsWithSortName() -> [SubscribeMovie]{
         
         let sortedMovies = getMovieObjects().sorted(by: { $0.name < $1.name })
         return sortedMovies

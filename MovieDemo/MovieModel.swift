@@ -14,18 +14,18 @@ import RxSwift
 
 protocol MovieModelProtocol {
     func getMovieList(router:AlamofireRouter, completion: @escaping (_ result: MovieObjects?, _ error: Error?) -> Void)
-    func getMovieObject() -> [Subscribe]
+    func getMovieObject() -> [SubscribeMovie]
     func setMovieObjectToRealm(dic:[String:AnyObject])
     func removeRealmObjects()
-    func queryData(query:String, completionHandler: @escaping ([Subscribe],Bool) -> ())
+    func queryData(query:String, completionHandler: @escaping ([SubscribeMovie],Bool) -> ())
 }
 
 class MovieModel: MovieModelProtocol {
     
-    var allMovies:[Subscribe] = [Subscribe]()
-    var shownMovie:[Subscribe] = [Subscribe]()
+    var allMovies:[SubscribeMovie] = [SubscribeMovie]()
+    var shownMovie:[SubscribeMovie] = [SubscribeMovie]()
     
-    var realmObjects:RealmObjects = RealmObjects()
+    var realmObjects:MovieRealmObjects = MovieRealmObjects()
     
     func getMovieList(router:AlamofireRouter, completion: @escaping (_ result: MovieObjects?, _ error: Error?) -> Void){
         
@@ -51,7 +51,7 @@ class MovieModel: MovieModelProtocol {
             , name: dic["title"] as? String ?? "", image: dic["backdrop_path"] as? String ?? "")
     }
     
-    func getMovieObject() -> [Subscribe]{
+    func getMovieObject() -> [SubscribeMovie]{
         
         shownMovie = realmObjects.getMovieObjects()
         allMovies = shownMovie
@@ -63,7 +63,7 @@ class MovieModel: MovieModelProtocol {
         realmObjects.removeMovieObjects()
     }
     
-    func queryData(query:String, completionHandler: @escaping ([Subscribe],Bool) -> ()){
+    func queryData(query:String, completionHandler: @escaping ([SubscribeMovie],Bool) -> ()){
         
         shownMovie = allMovies.filter {
             return $0.name.range(of: query) != nil

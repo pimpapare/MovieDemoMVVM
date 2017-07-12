@@ -16,7 +16,7 @@ protocol MovieTableViewControllerProtocol {
     
     func onDataDidLoad()
     func onDataDidLoadErrorWithMessage(errorMessage: String)
-    func reloadWithData(newData:[Subscribe])
+    func reloadWithData(newData:[SubscribeMovie])
 }
 
 class MovieTableViewController: UIViewController, MovieTableViewControllerProtocol {
@@ -27,7 +27,7 @@ class MovieTableViewController: UIViewController, MovieTableViewControllerProtoc
     var querySucess:Bool = false
     var movieViewModel:MovieViewModel!
     let disposeBag = DisposeBag()
-    var movieList:[Subscribe] = [Subscribe]()
+    var movieList:[SubscribeMovie] = [SubscribeMovie]()
     
     override func viewDidLoad() {
         
@@ -63,13 +63,16 @@ class MovieTableViewController: UIViewController, MovieTableViewControllerProtoc
         showAlertPopup(title: "Error", message: errorMessage, yes_text: "OK")
     }
     
-    func reloadWithData(newData:[Subscribe]){
+    func reloadWithData(newData:[SubscribeMovie]){
         movieList = newData
     }
     
     func emptyView() -> UIView? {
         let nibView = Bundle.main.loadNibNamed("EmptyView", owner: nil, options: nil)!.first as! EmptyView
         return nibView
+    }
+    
+    @IBAction func unwindToTableViewWithSegue(segue:UIStoryboardSegue) {
     }
 }
 

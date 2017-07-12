@@ -8,19 +8,19 @@
 
 import UIKit
 
-class MovieCollectionViewCell: UICollectionViewCell {
+class PlaceCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var imageCell: UIImageView!
     
-    static let identifier = "MovieCollectionViewCell"
+    static let identifier = "PlaceCollectionViewCell"
 
     override func awakeFromNib() {
         imageCell.layer.cornerRadius = 5
     }
     
-    func setCell(objects:Subscribe) {
-        self.title.text = objects.name
-        self.imageCell.moa.url = String(format:"http://image.tmdb.org/t/p/w185/%@",objects.image)
+    func setCell(objects:SubscribePlace) {
+        self.title.text = "\(objects.name)"
+        self.imageCell.moa.url = objects.image
     }
 }

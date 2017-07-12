@@ -11,7 +11,11 @@ import UIKit
 
 extension AlamofireRouter {
 
-    public var baseURL: String {
+    public var baseURLMovie: String {
         return "https://api.themoviedb.org/3/discover/"
+    }
+    
+    public var baseURLPlace: String {
+        return "http://www.lannalivinglifestyle.com/api/"
     }
 }

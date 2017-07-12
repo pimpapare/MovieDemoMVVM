@@ -11,4 +11,5 @@ import Foundation
 public enum AlamofireRouter: AlamofireRouterProtocol {
 
     case getMovieList(api_key:String,sort_by:String,page:Int)
+    case getPlaceList
 }
