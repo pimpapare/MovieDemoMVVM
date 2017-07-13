@@ -101,6 +101,8 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/RxSwift/RxSwift.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Shimmer/Shimmer.framework"
   install_framework "$BUILT_PRODUCTS_DIR/moa/moa.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Mockit/Mockit.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SwiftHamcrest/Hamcrest.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/AAShimmerView/AAShimmerView.framework"
@@ -115,6 +117,8 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/RxSwift/RxSwift.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Shimmer/Shimmer.framework"
   install_framework "$BUILT_PRODUCTS_DIR/moa/moa.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Mockit/Mockit.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SwiftHamcrest/Hamcrest.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

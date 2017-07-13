@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "44C077FAA939C68389B90BA325184B92"
+               BlueprintIdentifier = "6111B1C134429310A33622D5A0F022E2"
                BuildableName = "Hamcrest.framework"
                BlueprintName = "SwiftHamcrest"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "44C077FAA939C68389B90BA325184B92"
+            BlueprintIdentifier = "6111B1C134429310A33622D5A0F022E2"
             BuildableName = "Hamcrest.framework"
             BlueprintName = "SwiftHamcrest"
             ReferencedContainer = "container:Pods.xcodeproj">
