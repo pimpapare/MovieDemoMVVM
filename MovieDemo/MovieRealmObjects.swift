@@ -18,11 +18,9 @@ class MovieRealmObjects: NSObject {
         let subscribe = SubscribeMovie()
         
         try! realm.write {
-            
             subscribe.id = id
             subscribe.name = name
             subscribe.image = image
-            
             realm.add(subscribe)
         }
     }
@@ -45,7 +43,7 @@ class MovieRealmObjects: NSObject {
     }
     
     func getMovieObjectsWithSortName() -> [SubscribeMovie]{
-        
+
         let sortedMovies = getMovieObjects().sorted(by: { $0.name < $1.name })
         return sortedMovies
     }

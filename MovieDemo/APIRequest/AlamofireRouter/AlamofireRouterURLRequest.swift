@@ -35,6 +35,11 @@ extension AlamofireRouter {
             urlRequest.httpMethod = method.rawValue
             urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
             return urlRequest
+        case .getProfile:
+            var urlRequest = URLRequest(url: URL(string: baseURLProfile + path)!)
+            urlRequest.httpMethod = method.rawValue
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
+            return urlRequest
         case .getPlaceList:
             var urlRequest = URLRequest(url: URL(string: baseURLPlace + path)!)
             urlRequest.httpMethod = method.rawValue

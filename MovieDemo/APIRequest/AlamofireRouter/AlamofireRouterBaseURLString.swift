@@ -14,6 +14,9 @@ extension AlamofireRouter {
     public var baseURLMovie: String {
         return "https://api.themoviedb.org/3/discover/"
     }
+    public var baseURLProfile: String {
+        return "https://api.github.com/"
+    }
     
     public var baseURLPlace: String {
         return "http://www.lannalivinglifestyle.com/api/"

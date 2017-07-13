@@ -15,6 +15,8 @@ extension AlamofireRouter {
         switch self {
         case .getMovieList:
             return "movie"
+        case .getProfile(let name):
+            return "users/\(name)"
         case .getPlaceList:
             return "allplace"
         }

@@ -37,7 +37,7 @@ class PlaceCollectionViewController: UIViewController, PlaceCollectionViewContro
     }
 
     @IBAction func goBackToTableView(_ sender: Any) {
-        performSegue(withIdentifier: "unwindToTableViewWithSegue", sender: self)
+        performSegue(withIdentifier: .unwindToTableViewWithSegue, sender: self)
     }
     
     func onDataDidLoad() {
@@ -56,7 +56,6 @@ class PlaceCollectionViewController: UIViewController, PlaceCollectionViewContro
         let nibView = Bundle.main.loadNibNamed("EmptyView", owner: nil, options: nil)!.first as! EmptyView
         return nibView
     }
-
 }
 
 extension PlaceCollectionViewController: UIScrollViewDelegate, EmptyViewDelegate {

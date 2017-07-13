@@ -18,14 +18,11 @@ class MovieTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.frame = CGRect(x:0,y:0,width:UIScreen.main.bounds.width,height:UIScreen.main.bounds.height)
+        self.frame = CGRect(x:0,y:0,width:Constants.deviceWidth,height:Constants.deviceHeight)
     }
 
     func setCell(objects:SubscribeMovie) {
             
-//        titleCell.text = objects["title"] as? String
-//        self.imageCell.moa.url = String(format:"http://image.tmdb.org/t/p/w185/%@",objects["backdrop_path"] as? String ?? "")
-    
         titleCell.text = objects.name
         self.imageCell.moa.url = String(format:"http://image.tmdb.org/t/p/w185/%@",objects.image)
     }

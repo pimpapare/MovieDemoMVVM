@@ -41,7 +41,6 @@ class PlaceViewModel {
                     }
                 }
                 
-                //self.modelProtocol.setMovieObject()
                 self.viewInterfaceProtocol.reloadWithData(newData: self.model.getPlaceObject())
                 self.viewInterfaceProtocol.onDataDidLoad()
             }

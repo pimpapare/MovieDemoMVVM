@@ -15,7 +15,6 @@ class LauchViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
-        
         self.perform(#selector(goToMovieTableView), with: nil, afterDelay: 2)
     }
     

@@ -22,4 +22,14 @@ public extension String {
     public static let segueMovieTableView = "movieTableView"
     public static let segueMovieCollectionView = "movieCollectionView"
     
+    //seque
+    public static let unwindToTableViewWithSegue = "unwindToTableViewWithSegue"
+    
+    //profile
+    public static let name = "Name: "
+    public static let company = "Company: "
+    public static let blog = "Blog: "
+    public static let created_at = "Created_at: "
+    public static let email = "Email: "
+    public static let hireable = "Hireable: "
 }

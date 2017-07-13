@@ -18,6 +18,8 @@ extension AlamofireRouter {
                           "sort_by": sort_by,
                           "page": page] as [String : Any]
             return params as [String : Any]
+        case .getProfile:
+            return nil
         case .getPlaceList:
             return nil
         }

@@ -20,6 +20,7 @@ class PlaceCollectionViewCell: UICollectionViewCell {
     }
     
     func setCell(objects:SubscribePlace) {
+        
         self.title.text = "\(objects.name)"
         self.imageCell.moa.url = objects.image
     }

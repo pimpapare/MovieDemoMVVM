@@ -11,8 +11,9 @@ import Alamofire
 public protocol AlamofireRouterProtocol: URLRequestConvertible {
     
     var baseURLMovie: String { get }
+    var baseURLProfile: String { get }
     var baseURLPlace: String { get }
-    
+
     var path: String { get }
     var method: Alamofire.HTTPMethod { get }
     var headers: [String: String]? { get }

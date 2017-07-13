@@ -1,5 +1,5 @@
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '9.0'
+platform :ios, '8.0'
 use_frameworks!
 
 target 'MovieDemo' do
@@ -15,8 +15,10 @@ target 'MovieDemo' do
     
     pod 'RealmSwift', '~> 2.2'
     pod 'RxAlamofire'
-    
-    # Pods for MovieDemo
+    pod 'Shimmer'
+    pod "AAShimmerView" # loading tableView
+
+# Pods for MovieDemo
     target 'MovieDemoTests' do        
         platform :ios, '9.0'
         pod 'RxAlamofire'

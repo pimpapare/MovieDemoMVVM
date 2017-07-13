@@ -89,27 +89,31 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "$BUILT_PRODUCTS_DIR/Alamofire/Alamofire.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/AlamofireObjectMapper/AlamofireObjectMapper.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/AAShimmerView/AAShimmerView.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Alamofire-iOS8.0/Alamofire.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/AlamofireObjectMapper-iOS8.0/AlamofireObjectMapper.framework"
   install_framework "$BUILT_PRODUCTS_DIR/EZSwiftExtensions/EZSwiftExtensions.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/ObjectMapper/ObjectMapper.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/ObjectMapper-iOS8.0/ObjectMapper.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Realm/Realm.framework"
   install_framework "$BUILT_PRODUCTS_DIR/RealmSwift/RealmSwift.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/RxAlamofire/RxAlamofire.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/RxAlamofire-iOS8.0/RxAlamofire.framework"
   install_framework "$BUILT_PRODUCTS_DIR/RxCocoa/RxCocoa.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/RxSwift/RxSwift.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/RxSwift-iOS8.0/RxSwift.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Shimmer/Shimmer.framework"
   install_framework "$BUILT_PRODUCTS_DIR/moa/moa.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "$BUILT_PRODUCTS_DIR/Alamofire/Alamofire.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/AlamofireObjectMapper/AlamofireObjectMapper.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/AAShimmerView/AAShimmerView.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Alamofire-iOS8.0/Alamofire.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/AlamofireObjectMapper-iOS8.0/AlamofireObjectMapper.framework"
   install_framework "$BUILT_PRODUCTS_DIR/EZSwiftExtensions/EZSwiftExtensions.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/ObjectMapper/ObjectMapper.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/ObjectMapper-iOS8.0/ObjectMapper.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Realm/Realm.framework"
   install_framework "$BUILT_PRODUCTS_DIR/RealmSwift/RealmSwift.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/RxAlamofire/RxAlamofire.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/RxAlamofire-iOS8.0/RxAlamofire.framework"
   install_framework "$BUILT_PRODUCTS_DIR/RxCocoa/RxCocoa.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/RxSwift/RxSwift.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/RxSwift-iOS8.0/RxSwift.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Shimmer/Shimmer.framework"
   install_framework "$BUILT_PRODUCTS_DIR/moa/moa.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then

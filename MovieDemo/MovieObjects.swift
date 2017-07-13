@@ -11,6 +11,7 @@ import Foundation
 class MovieObjects: BaseModel {
     
     var movies:[[String:AnyObject]]?
+    
     var statusService:Bool?
     var statusMessage:String?
     
@@ -24,7 +25,7 @@ class MovieObjects: BaseModel {
         super.init(withDictionary: dict)
         self.movies = dict["results"] as? [[String : AnyObject]]
         
-        //case error
+        //for case error
         self.statusService = dict["success"] as? Bool
         self.statusMessage = dict["status_message"] as? String
         

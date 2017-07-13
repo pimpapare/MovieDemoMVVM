@@ -29,6 +29,8 @@ class MovieTableViewController: UIViewController, MovieTableViewControllerProtoc
     let disposeBag = DisposeBag()
     var movieList:[SubscribeMovie] = [SubscribeMovie]()
     
+    var loadData:Bool = false
+    
     override func viewDidLoad() {
         
         setupTableView()
@@ -56,10 +58,14 @@ class MovieTableViewController: UIViewController, MovieTableViewControllerProtoc
     }
     
     func onDataDidLoad() {
+        removeEmptyView()
+        loadData = false
         self.tableView.reloadData()
     }
     
     func onDataDidLoadErrorWithMessage(errorMessage: String) {
+        addEmptyView()
+        loadData = false
         showAlertPopup(title: "Error", message: errorMessage, yes_text: "OK")
     }
     
@@ -92,7 +98,10 @@ extension MovieTableViewController: UIScrollViewDelegate, EmptyViewDelegate {
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         
-        let distance = scrollView.contentSize.height - (targetContentOffset.pointee.y + scrollView.bounds.height)
-        movieViewModel.verifyScaleForReloadData(distance: distance, querySucess: querySucess)
+        if !loadData {
+            loadData = true
+            let distance = scrollView.contentSize.height - (targetContentOffset.pointee.y + scrollView.bounds.height)
+            movieViewModel.verifyScaleForReloadData(distance: distance, querySucess: querySucess)
+        }
     }
 }

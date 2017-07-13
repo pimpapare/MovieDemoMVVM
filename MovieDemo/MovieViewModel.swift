@@ -18,6 +18,7 @@ class MovieViewModel {
     var page: Int! = 0
     
     required init(view:MovieTableViewControllerProtocol, viewControllerModel:MovieModelProtocol) {
+        
         self.viewInterfaceProtocol = view
         self.modelProtocol = viewControllerModel
     }
@@ -29,8 +30,7 @@ class MovieViewModel {
     func getMovieList() {
         
         page = page + 1
-        let router = AlamofireRouter.getMovieList(api_key: "6c26bbd637c722ffab43dc6984053411",
-                                                  sort_by: "popularity.desc", page: page)
+        let router = AlamofireRouter.getMovieList(api_key: "6c26bbd637c722ffab43dc6984053411",sort_by: "popularity.desc", page: page)
         
         self.modelProtocol.getMovieList(router: router) { (result,error) in
             
@@ -44,7 +44,6 @@ class MovieViewModel {
                     }
                 }
                 
-                //self.modelProtocol.setMovieObject()
                 self.viewInterfaceProtocol.reloadWithData(newData: self.model.getMovieObject())
                 self.viewInterfaceProtocol.onDataDidLoad()
             }
@@ -53,16 +52,20 @@ class MovieViewModel {
     
     func verifyScaleForReloadData(distance:CGFloat, querySucess:Bool){
         
-        if distance < 150 && querySucess == false{
-            self.getMovieList()
+        guard distance < 150 && querySucess == false else{
+            return
         }
+        
+        self.getMovieList()
     }
     
     func verifyForRemoveRealmObjects(forceRemove:Bool){
         
-        if baseFunction.isInternetAvailable() || forceRemove == true{
-            model.removeRealmObjects()
+        guard baseFunction.isInternetAvailable() || forceRemove == true else{
+            return
         }
+        
+        model.removeRealmObjects()
     }
     
     func verifyQueryData(query:String, completionHandler: @escaping (Bool) -> ()){
