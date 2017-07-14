@@ -24,13 +24,16 @@ class ProfileObjects: BaseModel {
     required init(withDictionary dict: [String:AnyObject]) {
         super.init(withDictionary: dict)
         
-        avatar_url = dict["avatar_url"] as? String ?? " "
-        name = dict["name"] as? String ?? " "
-        company = dict["company"] as? String ?? " "
-        blog = dict["blog"] as? String ?? " "
-        created_at = dict["created_at"] as? String ?? " "
-        email = dict["email"] as? String ?? " "
-        hireable = dict["hireable"] as? String ?? " "
+        avatar_url = dict["avatar_url"] as? String ?? "None"
+        name = dict["name"] as? String ?? "None"
+        company = dict["company"] as? String ?? "None"
+        blog = dict["blog"] as? String ?? "None"
+        
+        let convertSringToDate = dict["created_at"] as? String ?? ""
+        created_at = convertSringToDate.toDate().string
+        
+        email = dict["email"] as? String ?? "None"
+        hireable = dict["hireable"] as? String ?? "None"
         
         //case error
         statusService = dict["success"] as? Bool

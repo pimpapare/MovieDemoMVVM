@@ -31,7 +31,6 @@ class MovieViewModel {
         
         page = page + 1
         let router = AlamofireRouter.getMovieList(api_key: "6c26bbd637c722ffab43dc6984053411",sort_by: "popularity.desc", page: page)
-        
         self.modelProtocol.getMovieList(router: router) { (result,error) in
             
             if let e = error {
