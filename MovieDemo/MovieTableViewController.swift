@@ -73,9 +73,6 @@ class MovieTableViewController: UIViewController, MovieTableViewControllerProtoc
         let nibView = Bundle.main.loadNibNamed("EmptyView", owner: nil, options: nil)!.first as! EmptyView
         return nibView
     }
-    
-    @IBAction func unwindToTableViewWithSegue(segue:UIStoryboardSegue) {
-    }
 }
 
 extension MovieTableViewController: UIScrollViewDelegate, EmptyViewDelegate {
